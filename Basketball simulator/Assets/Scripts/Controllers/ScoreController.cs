@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
-    public static ScoreController instance;
     public ParticleSystem particleScore;
-    public Transform hood;
-    public int minDistanceHood;
-    public int maxDistanceHood;
     private float _countdownStopParticle;
     private bool _particleIsPlaying;
-
-    void Awake()
-    {
-        instance = this;
-    }
 
     void Update()
     {
@@ -26,25 +17,19 @@ public class ScoreController : MonoBehaviour
     {
         if(other.tag == "Ball")
         {
+            GameManager.GetPlayer().SetNewPosition();    
             MadeAPoint();
-            RandomizeHoodPosition();      
         }
     }
 
     void MadeAPoint()
     {
-        PlayerController.instance.ball.transform.position = PlayerController.instance.transform.position;
-        PlayerController.instance.ball.rbody.velocity = Vector3.zero;
-        PlayerController.instance.score++;
+        GameManager.GetPlayer().ball.transform.position = GameManager.GetPlayer().transform.position;
+        GameManager.GetPlayer().ball.rbody.velocity = Vector3.zero;
+        GameManager.GetPlayer().score++;
         particleScore.Play();  
         _particleIsPlaying = true;  
     }
-
-    void RandomizeHoodPosition ()
-    {
-        Vector3 randomPosition = new Vector3(0f, 0f, Random.Range(minDistanceHood, maxDistanceHood));
-        hood.position = randomPosition;
-    } 
 
     void TimeToStopParticle()
     {
@@ -61,11 +46,5 @@ public class ScoreController : MonoBehaviour
                 particleScore.Stop(); 
             }
         }
-    }
-
-    public void ResetPositionHood()
-    {
-        Vector3 minPosition = new Vector3(0f, 0f,minDistanceHood);
-        hood.position = minPosition;
     }
 }

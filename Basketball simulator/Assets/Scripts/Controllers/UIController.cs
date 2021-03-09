@@ -6,14 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {   
-    public GameObject endGamePanel;
+    [Header("Input variables")]
     public Slider angleSlider;
     public Slider throwingForceSlider;
     public Button throwingButton;
+
+    [Header("In game variables")]
+    public GameObject countdownToStartText;
     public Text scoreText;
     public Text timeText;
     public Text countBallThrowingText;
     public Text angleText;
+
+    [Header("End game variables")]
+    public GameObject endGamePanel;
+    public Text finalScoreText;
+    public Text amountBallThrowingText;
     public Button menuButton;
     public Button playAgainButton;
     public Button quitButton; 
@@ -21,7 +29,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
         InitializeListerners();        
-        SetupUIValues();
+        SetupUIValues();        
     }
 
     void Update()
@@ -34,7 +42,7 @@ public class UIController : MonoBehaviour
     void SetupUIValues ()
     {
         throwingForceSlider.minValue = 1;
-        throwingForceSlider.maxValue = PlayerController.instance.maxThrowingForce;
+        throwingForceSlider.maxValue = GameManager.GetPlayer().maxThrowingForce;
 
         SetRotationValue(angleSlider.maxValue);
         angleSlider.value = angleSlider.maxValue;
@@ -47,50 +55,52 @@ public class UIController : MonoBehaviour
         throwingButton.onClick.AddListener(BallThrowing);
         menuButton.onClick.AddListener(LoadMenuScene);
         playAgainButton.onClick.AddListener(PlayAgain);
-        quitButton.onClick.AddListener(Quit);
+        quitButton.onClick.AddListener(Quit);                    
     }
 
     void BallThrowing()
     {
-        if(!TimeController.instance.endGame)
+        if(!GameManager.GetTime().endGame && GameManager.GetTime().canStartGame)
         {
-            PlayerController.instance.amountThrowing++;
-            countBallThrowingText.text = PlayerController.instance.amountThrowing.ToString();
-            PlayerController.instance.SetBallDirection();
+            GameManager.GetPlayer().amountThrowing++;
+            countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
+            GameManager.GetPlayer().SetBallDirection();
         }
     }
 
     public void SetThrowingForce(float value)
     {
         throwingForceSlider.value = value;        
-        PlayerController.instance.currentThrowingForce = value;
+        GameManager.GetPlayer().currentThrowingForce = value;
     }
 
     public void SetRotationValue(float value)
     {
         angleText.text = value.ToString("0º");
-        PlayerController.instance.SetRotation(value);
+        GameManager.GetPlayer().SetRotation(value);
     }
 
     void SetScore()
     {
-        if(scoreText.text != PlayerController.instance.score.ToString() &&
-           !TimeController.instance.endGame)
+        if(scoreText.text != GameManager.GetPlayer().score.ToString() &&
+           !GameManager.GetTime().endGame)
         {
-            scoreText.text = PlayerController.instance.score.ToString();
+            scoreText.text = GameManager.GetPlayer().score.ToString();
         }
     }   
 
     void SetGameplayTime()
     {
-        timeText.text = TimeController.instance.gameplayTime.ToString("00.0");
+        timeText.text = GameManager.GetTime().gameplayTime.ToString("00.0");
     }
 
     void SetEndGame()
     {
-        if(TimeController.instance.endGame)
+        if(GameManager.GetTime().endGame)
         {
             endGamePanel.SetActive(true);
+            finalScoreText.text = GameManager.GetPlayer().score.ToString();
+            amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
         }        
     }
 
@@ -101,9 +111,8 @@ public class UIController : MonoBehaviour
     void PlayAgain()
     {
         ResetUIValues();
-        PlayerController.instance.ResetValues();
-        TimeController.instance.ResetTime();
-        ScoreController.instance.ResetPositionHood();
+        GameManager.GetPlayer().ResetValues();
+        GameManager.GetTime().ResetValues();        
     }
 
     void Quit()

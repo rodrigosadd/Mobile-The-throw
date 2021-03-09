@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController instance;
+    [Header("Player variables")]
     public Ball ball;
     public int score;
     public int amountThrowing;
     public float currentThrowingForce; 
     public float maxThrowingForce;
 
-    void Awake()
+    [Header("New position variables")]
+    public int minDistancePosition;
+    public int maxDistancePosition;
+    private Vector3 _startPosition;
+
+    void Start()
     {
-        instance = this;
+        _startPosition = new Vector3(transform.position.x,transform.position.y, transform.position.z);
     }
 
     public void SetRotation(float value)
@@ -32,11 +37,23 @@ public class PlayerController : MonoBehaviour
         return transform.rotation * Vector3.forward;
     }
 
+    public void SetNewPosition()
+    {        
+        transform.position = RandomizePosition();       
+    }
+
+    Vector3 RandomizePosition()
+    {
+        Vector3 randomPosition = new Vector3(0f, _startPosition.y, Random.Range(minDistancePosition, maxDistancePosition));
+        return randomPosition;
+    }
+
     public void ResetValues()
     {
         score = 0;
         amountThrowing = 0;
         currentThrowingForce = 1;
+        transform.position = _startPosition;
         ball.transform.position = ball.startPosition;
         ball.rbody.velocity = Vector3.zero;
         SetRotation(45);
