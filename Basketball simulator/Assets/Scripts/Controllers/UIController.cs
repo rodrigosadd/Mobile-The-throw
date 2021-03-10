@@ -106,13 +106,12 @@ public class UIController : MonoBehaviour
 
     void LoadMenuScene()
     {
-         SceneManager.LoadScene(0);
+        ResetAll();
+        SceneManager.LoadScene(0);
     }
     void PlayAgain()
     {
-        ResetUIValues();
-        GameManager.GetPlayer().ResetValues();
-        GameManager.GetTime().ResetValues();        
+        ResetAll();       
     }
 
     void Quit()
@@ -127,5 +126,11 @@ public class UIController : MonoBehaviour
         countBallThrowingText.text = 0.ToString(); 
         throwingForceSlider.value = 1;    
         angleSlider.value = angleSlider.maxValue;   
+    }
+    void ResetAll()
+    {
+        ResetUIValues();
+        GameManager.GetPlayer().ResetValues();
+        GameManager.GetTime().ResetValues();
     }
 }
