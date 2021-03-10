@@ -62,9 +62,12 @@ public class UIController : MonoBehaviour
     {
         if(!GameManager.GetTime().endGame && GameManager.GetTime().canStartGame)
         {
-            GameManager.GetPlayer().amountThrowing++;
-            countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
-            GameManager.GetPlayer().SetBallDirection();
+            if(!GameManager.GetPlayer().ball.canStartTrail)
+            {
+                GameManager.GetPlayer().amountThrowing++;
+                countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
+                GameManager.GetPlayer().SetBallDirection();            
+            }
         }
     }
 
@@ -132,5 +135,6 @@ public class UIController : MonoBehaviour
         ResetUIValues();
         GameManager.GetPlayer().ResetValues();
         GameManager.GetTime().ResetValues();
+        GameManager.GetPlayer().ball.ResetTrailValues();
     }
 }

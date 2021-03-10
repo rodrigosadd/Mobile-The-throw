@@ -21,14 +21,18 @@ public class PlayerController : MonoBehaviour
         _startPosition = new Vector3(transform.position.x,transform.position.y, transform.position.z);
     }
 
+   
+
     public void SetRotation(float value)
     {
         transform.rotation = Quaternion.Euler(value, transform.rotation.y, transform.rotation.z);
     }
 
     public void SetBallDirection()
-    {
-        ball.rbody.velocity = BallDirection() * currentThrowingForce;
+    {   
+        ball.canStartTrail = true;
+        ball.ResetTrailValues();
+        ball.rbody.velocity = BallDirection() * currentThrowingForce;   
     }
 
     Vector3 BallDirection()
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
         ball.transform.position = transform.position; 
         return transform.rotation * Vector3.forward;
     }
+
 
     public void SetNewPosition()
     {        

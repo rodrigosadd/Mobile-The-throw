@@ -12,24 +12,34 @@ public class TimeController : MonoBehaviour
     public bool endGame;
     private float _countdownToStart;
 
+    void Start()
+    {
+        ConvertToMinutes ();
+    }
+
     void Update()
     {
-        GameplayTime();
+        GamePlayTime();
         CheckEndGame();
         CountdownToStart();
     }
 
-    void GameplayTime()
+    void ConvertToMinutes()
+    {
+        gameplayTime = gameMinutes * 60;
+    }
+
+    void GamePlayTime()
     {
         if(!endGame && canStartGame)
         {
-            gameplayTime += Time.deltaTime * 1;
+            gameplayTime -= Time.deltaTime * 1;
         }
     }
 
     void CheckEndGame()
     {
-        if(gameplayTime >= gameMinutes * 60)
+        if(gameplayTime <= 0f)
         {
             endGame = true; 
             EndGame();
@@ -45,11 +55,11 @@ public class TimeController : MonoBehaviour
     {
         Time.timeScale = 1;
         endGame = false; 
-        gameplayTime = 0;
         canStartGame = false;       
+        ConvertToMinutes ();
     }
 
-        void CountdownToStart()
+    void CountdownToStart()
     {
         if(!canStartGame)
         {
