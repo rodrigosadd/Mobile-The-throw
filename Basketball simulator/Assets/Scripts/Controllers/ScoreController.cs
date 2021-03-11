@@ -32,7 +32,7 @@ public class ScoreController : MonoBehaviour
         GameManager.GetUI().canStartAddedTimeAnim = true;
         particleScore.Play();  
         _particleIsPlaying = true;  
-        GameManager.GetAudio().Play("Point");
+        AudioManager.instance.Play("Point");
     }
 
     void TimeToStopParticle()

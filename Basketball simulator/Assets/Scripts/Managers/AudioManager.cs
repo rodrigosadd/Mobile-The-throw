@@ -4,12 +4,15 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioController : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
+     [Header("Audio Instance")]
+    public static AudioManager instance;
     public Sound[] sounds;
 
     void Awake()
     {
+        instance = this;
         SetSounds();
     }
 

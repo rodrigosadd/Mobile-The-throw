@@ -27,7 +27,6 @@ public class UIController : MonoBehaviour
     public Text amountBallThrowingText;
     public Button menuButton;
     public Button playAgainButton;
-    public Button quitButton; 
 
     void Start()
     {
@@ -58,8 +57,7 @@ public class UIController : MonoBehaviour
         throwingForceSlider.onValueChanged.AddListener(SetThrowingForce);
         throwingButton.onClick.AddListener(BallThrowing);
         menuButton.onClick.AddListener(LoadMenuScene);
-        playAgainButton.onClick.AddListener(PlayAgain);
-        quitButton.onClick.AddListener(Quit);                    
+        playAgainButton.onClick.AddListener(PlayAgain);                
     }
 
     void BallThrowing()
@@ -71,7 +69,7 @@ public class UIController : MonoBehaviour
                 GameManager.GetPlayer().amountThrowing++;
                 countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
                 GameManager.GetPlayer().SetBallDirection();   
-                GameManager.GetAudio().Play("Throwing");         
+                AudioManager.instance.Play("Throwing");    
             }
         }
     }
@@ -84,7 +82,7 @@ public class UIController : MonoBehaviour
 
     public void SetRotationValue(float value)
     {
-        angleText.text = value.ToString("0º");
+        angleText.text = (value * -1).ToString("0º");
         GameManager.GetPlayer().SetRotation(value);
     }
 
@@ -106,7 +104,7 @@ public class UIController : MonoBehaviour
     {
         if(GameManager.GetTime().endGame && !endGamePanel.activeSelf)
         {
-            GameManager.GetAudio().Play("Finish game");          
+            AudioManager.instance.Play("Finish game");          
             endGamePanel.SetActive(true);
             finalScoreText.text = GameManager.GetPlayer().score.ToString();
             amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
@@ -123,12 +121,6 @@ public class UIController : MonoBehaviour
         GameManager.instance.ResetAll();      
     }
 
-    void Quit()
-    {
-        Debug.Log("Quit game!");
-        Application.Quit();
-    }
-
     void ActiveAddedPointAnim()
     {
         if(canStartAddedTimeAnim)
@@ -140,7 +132,7 @@ public class UIController : MonoBehaviour
                     addedTimeText.gameObject.SetActive(true);
                 }
 
-                _countdownAddedTime += Time.deltaTime / 0.5f;
+                _countdownAddedTime += Time.deltaTime / 1f;
             }
             else
             {
@@ -157,6 +149,6 @@ public class UIController : MonoBehaviour
         countBallThrowingText.text = 0.ToString(); 
         throwingForceSlider.value = 1;    
         angleSlider.value = angleSlider.maxValue;
-        timeText.color = Color.white;   
+        timeText.color = Color.white;           
     }
 }

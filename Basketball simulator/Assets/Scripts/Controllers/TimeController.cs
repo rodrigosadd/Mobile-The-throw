@@ -83,7 +83,7 @@ public class TimeController : MonoBehaviour
             }
             else
             {
-                GameManager.GetAudio().Play("Start game");
+                AudioManager.instance.Play("Start game");
                 _countdownToStart = 0;
                 GameManager.GetUI().countdownToStartText.SetActive(false);
                 canStartGame = true;                

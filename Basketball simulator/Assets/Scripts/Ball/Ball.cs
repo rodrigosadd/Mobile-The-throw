@@ -48,4 +48,9 @@ public class Ball : MonoBehaviour
         trail.time = 0;
         trail.enabled = false;      
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        AudioManager.instance.Play("Ball");
+    }
 }

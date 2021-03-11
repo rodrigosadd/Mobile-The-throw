@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public Button playButton;
-    public Button quitButton;
 
     void Start()
     {
@@ -16,8 +15,7 @@ public class MainMenu : MonoBehaviour
 
     void InitializeListerners()
     {
-        playButton.onClick.AddListener(PlayGame);
-        quitButton.onClick.AddListener(QuitGame);
+        playButton.onClick.AddListener(PlayGame);        
     }
 
     public void LoadScene(int indexScene)
@@ -27,12 +25,7 @@ public class MainMenu : MonoBehaviour
 
     void PlayGame()
     {
+        AudioManager.instance.Play("Click"); 
         LoadScene(1);
     }
-
-     void QuitGame()
-     {
-          Debug.Log("Quit!");
-          Application.Quit();
-     }
 }
