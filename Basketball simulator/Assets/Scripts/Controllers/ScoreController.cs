@@ -27,9 +27,12 @@ public class ScoreController : MonoBehaviour
         GameManager.GetPlayer().ball.transform.position = GameManager.GetPlayer().transform.position;
         GameManager.GetPlayer().ball.rbody.velocity = Vector3.zero;
         GameManager.GetPlayer().score++;
-        GameManager.GetPlayer().ball.trail.enabled = false;        
+        GameManager.GetPlayer().ball.trail.enabled = false;
+        GameManager.GetTime().AddedTime(0.2f);     
+        GameManager.GetUI().canStartAddedTimeAnim = true;
         particleScore.Play();  
         _particleIsPlaying = true;  
+        GameManager.GetAudio().Play("Point");
     }
 
     void TimeToStopParticle()

@@ -17,6 +17,9 @@ public class UIController : MonoBehaviour
     public Text timeText;
     public Text countBallThrowingText;
     public Text angleText;
+    public Text addedTimeText;
+    public bool canStartAddedTimeAnim;
+    private float _countdownAddedTime;
 
     [Header("End game variables")]
     public GameObject endGamePanel;
@@ -37,6 +40,7 @@ public class UIController : MonoBehaviour
         SetScore();
         SetGameplayTime();
         SetEndGame();
+        ActiveAddedPointAnim();
     }
 
     void SetupUIValues ()
@@ -66,7 +70,8 @@ public class UIController : MonoBehaviour
             {
                 GameManager.GetPlayer().amountThrowing++;
                 countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
-                GameManager.GetPlayer().SetBallDirection();            
+                GameManager.GetPlayer().SetBallDirection();   
+                GameManager.GetAudio().Play("Throwing");         
             }
         }
     }
@@ -99,8 +104,9 @@ public class UIController : MonoBehaviour
 
     void SetEndGame()
     {
-        if(GameManager.GetTime().endGame)
+        if(GameManager.GetTime().endGame && !endGamePanel.activeSelf)
         {
+            GameManager.GetAudio().Play("Finish game");          
             endGamePanel.SetActive(true);
             finalScoreText.text = GameManager.GetPlayer().score.ToString();
             amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
@@ -109,12 +115,12 @@ public class UIController : MonoBehaviour
 
     void LoadMenuScene()
     {
-        ResetAll();
+        GameManager.instance.ResetAll();
         SceneManager.LoadScene(0);
     }
     void PlayAgain()
     {
-        ResetAll();       
+        GameManager.instance.ResetAll();      
     }
 
     void Quit()
@@ -123,18 +129,34 @@ public class UIController : MonoBehaviour
         Application.Quit();
     }
 
-    void ResetUIValues()
+    void ActiveAddedPointAnim()
+    {
+        if(canStartAddedTimeAnim)
+        {
+            if(_countdownAddedTime < 1)
+            {           
+                if(!addedTimeText.gameObject.activeSelf)
+                {
+                    addedTimeText.gameObject.SetActive(true);
+                }
+
+                _countdownAddedTime += Time.deltaTime / 0.5f;
+            }
+            else
+            {
+                _countdownAddedTime = 0;
+                addedTimeText.gameObject.SetActive(false);                
+                canStartAddedTimeAnim = false;
+            }        
+        }
+    }
+
+    public void ResetUIValues()
     {
         scoreText.text = 0.ToString();        
         countBallThrowingText.text = 0.ToString(); 
         throwingForceSlider.value = 1;    
-        angleSlider.value = angleSlider.maxValue;   
-    }
-    void ResetAll()
-    {
-        ResetUIValues();
-        GameManager.GetPlayer().ResetValues();
-        GameManager.GetTime().ResetValues();
-        GameManager.GetPlayer().ball.ResetTrailValues();
+        angleSlider.value = angleSlider.maxValue;
+        timeText.color = Color.white;   
     }
 }

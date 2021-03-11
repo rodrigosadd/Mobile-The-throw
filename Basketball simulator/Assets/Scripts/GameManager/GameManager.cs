@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Instance")]
     public UIController uiInstance;
+    
+    [Header("Audio Instance")]
+    public AudioController AudioInstance;
  
     void Awake()
     {
@@ -41,5 +44,18 @@ public class GameManager : MonoBehaviour
     public static UIController GetUI()
     {
         return instance.uiInstance;
+    }
+
+    public static AudioController GetAudio()
+    {
+        return instance.AudioInstance;
+    }
+
+    public void ResetAll()
+    {
+        GetUI().ResetUIValues();
+        GetPlayer().ResetValues();
+        GetPlayer().ball.ResetTrailValues();
+        GetTime().ResetValues();
     }
 }
