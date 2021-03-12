@@ -6,10 +6,10 @@ public class Ball : MonoBehaviour
 {
     [Header("Ball variables")]
     public Rigidbody rbody;
-    public TrailRenderer trail;
     public Vector3 startPosition;
 
     [Header("Trail variables")]
+    public TrailRenderer trail;
     public bool canStartTrail;
     private float _countdownStartTrail;
 

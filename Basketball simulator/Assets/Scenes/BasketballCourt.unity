@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 0ea2945b0428ce644b4bb9b47e278acb, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 215f8bbcf1fc3dc409f75d05ed69608e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 378922316}
   - component: {fileID: 378922318}
   - component: {fileID: 378922317}
+  - component: {fileID: 378922319}
   m_Layer: 5
   m_Name: Score Text Title
   m_TagString: Untagged
@@ -966,6 +967,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378922315}
   m_CullTransparentMesh: 1
+--- !u!114 &378922319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378922315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: -2.5, y: -1.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &383890242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,7 +2523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 084fc2b126a88aa49a9f84efd5c41b67, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2536,6 +2552,7 @@ GameObject:
   - component: {fileID: 1082679502}
   - component: {fileID: 1082679504}
   - component: {fileID: 1082679503}
+  - component: {fileID: 1082679505}
   m_Layer: 5
   m_Name: 'Ball-throwing count Text '
   m_TagString: Untagged
@@ -2604,6 +2621,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082679501}
   m_CullTransparentMesh: 1
+--- !u!114 &1082679505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082679501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: -2.5, y: -1.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1126046719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3245,6 +3277,7 @@ GameObject:
   - component: {fileID: 1412123516}
   - component: {fileID: 1412123518}
   - component: {fileID: 1412123517}
+  - component: {fileID: 1412123519}
   m_Layer: 5
   m_Name: Time Text
   m_TagString: Untagged
@@ -3313,6 +3346,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412123515}
   m_CullTransparentMesh: 1
+--- !u!114 &1412123519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412123515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: -2.5, y: -1.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1424094160
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,6 +3605,7 @@ GameObject:
   - component: {fileID: 1517222982}
   - component: {fileID: 1517222984}
   - component: {fileID: 1517222983}
+  - component: {fileID: 1517222985}
   m_Layer: 5
   m_Name: Score Text
   m_TagString: Untagged
@@ -3626,6 +3675,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517222981}
   m_CullTransparentMesh: 1
+--- !u!114 &1517222985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517222981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: -2.5, y: -1.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1523025887
 GameObject:
   m_ObjectHideFlags: 0
