@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    //Metodos apenas para simplificar a escrita de chamada do manager
     public static PlayerController GetPlayer()
     {
         return instance.playerInstance;
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
         return instance.uiInstance;
     }
 
+
+    //Redefine os valores do jogo
     public void ResetAll()
     {
         GetUI().ResetUIValues();

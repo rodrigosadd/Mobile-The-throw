@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
         InitializeListerners();
     }
 
+    //Inicializa os Listerners da UI
     void InitializeListerners()
     {
         playButton.onClick.AddListener(PlayGame);        

@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //Procura dentro do array de sons o nome do som passado por parâmetro e toca ele
     public void Play(string name)
     {
         Sound sound = Array.Find(sounds, sound => sound.name == name);

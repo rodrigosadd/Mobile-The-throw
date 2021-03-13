@@ -15,8 +15,11 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        //Apenas para definir os componentes para as variáveis
         rbody = GetComponent<Rigidbody>();
         trail = GetComponent<TrailRenderer>();
+
+        //Pegando a posição inicial da bola para facilitar na hora de reiniciar o jogo
         startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
@@ -25,6 +28,7 @@ public class Ball : MonoBehaviour
         ActiveTrail();
     }
 
+    //Inicializando o trail depois de um tempo para poder evitar que sua imagem sejá distorcida
     void ActiveTrail()
     {
         if(canStartTrail)
@@ -43,12 +47,14 @@ public class Ball : MonoBehaviour
         }
     }
 
+    //Apenas para facilitar na redefinição dos valores do trail
     public void ResetTrailValues()
     {
         trail.time = 0;
         trail.enabled = false;      
     }
 
+    //Verifica se a bola colidiu com algo e toca o som da bola
     void OnTriggerEnter(Collider other)
     {
         AudioManager.instance.Play("Ball");
