@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeController : MonoBehaviour
 {   
@@ -10,6 +11,9 @@ public class TimeController : MonoBehaviour
     public bool canStartGame;
     public bool endGame;
     private float _countdownToStart;
+
+    [Header("Events")]
+    public UnityEvent onCountdownToStart;
 
     void Start()
     {
@@ -90,7 +94,8 @@ public class TimeController : MonoBehaviour
             }
             else
             {
-                AudioManager.instance.Play("Start game");
+                //AudioManager.instance.Play("Start game");
+                onCountdownToStart?.Invoke();
                 _countdownToStart = 0;
                 GameManager.GetUI().countdownToStartText.SetActive(false);
                 canStartGame = true;                

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScoreController : MonoBehaviour
 {
+    [Header("Score variables")]
     public ParticleSystem particleScore;
     private float _countdownStopParticle;
     private bool _particleIsPlaying;
+
+    [Header("Events")]
+    public UnityEvent onMadeAPoint;
 
     void Update()
     {
@@ -16,7 +21,7 @@ public class ScoreController : MonoBehaviour
     //Verifica se a bola colidiu, caso tenha colidido o jogador marcou um ponto
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ball")
+        if(other.CompareTag("Ball"))
         {
             GameManager.GetPlayer().SetNewPosition();    
             MadeAPoint();
@@ -34,8 +39,9 @@ public class ScoreController : MonoBehaviour
         GameManager.GetTime().AddedTime(0.2f);     
         GameManager.GetUI().canStartAddedTimeAnim = true;
         particleScore.Play();  
-        _particleIsPlaying = true;  
-        AudioManager.instance.Play("Point");
+        _particleIsPlaying = true;
+        //AudioManager.instance.Play("Point");
+        onMadeAPoint?.Invoke();
     }
 
 

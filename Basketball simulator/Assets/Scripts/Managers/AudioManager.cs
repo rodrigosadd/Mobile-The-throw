@@ -2,48 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-     [Header("Audio Instance")]
+    [Header("Audio Instance")]
     public static AudioManager instance;
-    public Sound[] sounds;
+
+    [Header("Events")]
+    public UnityEvent onStart;
 
     void Awake()
     {
         instance = this;
-        SetSounds();
     }
 
     void Start()
     {
-        Play("Theme");
+        onStart?.Invoke();
     }
 
-    void SetSounds()
+    void SetSoundConfigs(Sound sound)
     {
-        foreach(Sound sound in  sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
-            sound.source.loop = sound.loop;
-        }
+        sound.source = gameObject.AddComponent<AudioSource>();
+        sound.source.clip = sound.clip;
+        sound.source.volume = sound.volume;
+        sound.source.pitch = sound.pitch;
+        sound.source.loop = sound.loop;
     }
 
-    //Procura dentro do array de sons o nome do som passado por parâmetro e toca ele
-    public void Play(string name)
+    public void Play(Sound sound)
     {
-        Sound sound = Array.Find(sounds, sound => sound.name == name);
-
-        if(sound == null)
+        if (sound == null)
         {
-            Debug.LogWarning("Sound: " + name + " not found");
+            Debug.LogWarning("Sound not found!");
             return;
         }
 
+        SetSoundConfigs(sound);
         sound.source.Play();
     }
 }

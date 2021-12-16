@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Ball : MonoBehaviour
     public TrailRenderer trail;
     public bool canStartTrail;
     private float _countdownStartTrail;
+
+    [Header("Events")]
+    public UnityEvent onBallCollision;
 
     void Start()
     {
@@ -57,6 +61,7 @@ public class Ball : MonoBehaviour
     //Verifica se a bola colidiu com algo e toca o som da bola
     void OnTriggerEnter(Collider other)
     {
-        AudioManager.instance.Play("Ball");
+        onBallCollision?.Invoke();
+        //AudioManager.instance.Play("Ball");
     }
 }

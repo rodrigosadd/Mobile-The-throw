@@ -1,9 +1,8 @@
 using UnityEngine;
 
-[System.Serializable]
-public class Sound
+[CreateAssetMenu(fileName = "Sound", menuName = "ScriptableObjects/Sound", order = 1)]
+public class Sound : ScriptableObject
 {
-    public string name;
     public AudioClip clip;
 
     [Range(0f, 1f)]

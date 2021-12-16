@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,10 @@ public class UIController : MonoBehaviour
     public Text amountBallThrowingText;
     public Button menuButton;
     public Button playAgainButton;
+
+    [Header("Events")]
+    public UnityEvent onBallThrowing;
+    public UnityEvent onSetEndGame;
 
     void Start()
     {
@@ -71,8 +76,9 @@ public class UIController : MonoBehaviour
             {
                 GameManager.GetPlayer().amountThrowing++;
                 countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
-                GameManager.GetPlayer().SetBallDirection();   
-                AudioManager.instance.Play("Throwing");    
+                GameManager.GetPlayer().SetBallDirection();
+                //AudioManager.instance.Play("Throwing");
+                onBallThrowing?.Invoke();
             }
         }
     }
@@ -113,7 +119,8 @@ public class UIController : MonoBehaviour
     {
         if(GameManager.GetTime().endGame && !endGamePanel.activeSelf)
         {
-            AudioManager.instance.Play("Finish game");          
+            //AudioManager.instance.Play("Finish game");
+            onSetEndGame?.Invoke();
             endGamePanel.SetActive(true);
             finalScoreText.text = GameManager.GetPlayer().score.ToString();
             amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
