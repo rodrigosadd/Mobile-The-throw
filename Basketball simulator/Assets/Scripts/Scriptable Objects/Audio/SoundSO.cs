@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Sound", menuName = "ScriptableObjects/Sound", order = 1)]
-public class Sound : ScriptableObject
+public class SoundSO : ScriptableObject
 {
     public AudioClip clip;
 

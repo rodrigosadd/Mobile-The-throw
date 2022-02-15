@@ -18,21 +18,13 @@ public class MainMenu : MonoBehaviour
         InitializeListerners();
     }
 
-    //Inicializa os Listerners da UI
     void InitializeListerners()
     {
         playButton.onClick.AddListener(PlayGame);        
     }
 
-    public void LoadScene(int indexScene)
-     {         
-          SceneManager.LoadScene(indexScene);
-     }
-
     void PlayGame()
     {
-        //AudioManager.instance.Play("Click"); 
         onPlayGame?.Invoke();
-        LoadScene(1);
     }
 }

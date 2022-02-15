@@ -17,13 +17,15 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Instance")]
     public UIController uiInstance;
-     
+
+    [Header("Pool System Instance")]
+    public PoolSystem poolSystemInstance;
+
     void Awake()
     {
         instance = this;
     }
 
-    //Metodos apenas para simplificar a escrita de chamada do manager
     public static PlayerController GetPlayer()
     {
         return instance.playerInstance;
@@ -44,13 +46,15 @@ public class GameManager : MonoBehaviour
         return instance.uiInstance;
     }
 
+    public static PoolSystem GetPoolSystem()
+    {
+        return instance.poolSystemInstance;
+    }
 
-    //Redefine os valores do jogo
     public void ResetAll()
     {
         GetUI().ResetUIValues();
         GetPlayer().ResetValues();
-        GetPlayer().ball.ResetTrailValues();
         GetTime().ResetValues();
     }
 }

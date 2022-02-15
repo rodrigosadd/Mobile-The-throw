@@ -624,7 +624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 596907218}
   m_Layer: 0
-  m_Name: --- Lights
+  m_Name: === Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -997,7 +997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1067737236}
   m_Layer: 0
-  m_Name: --- Camera
+  m_Name: === Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2088,18 +2088,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Theme
-    clip: {fileID: 8300000, guid: 1827bcca4feed8e4dae5889ea280b0e9, type: 3}
-    volume: 0.4
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Click
-    clip: {fileID: 8300000, guid: 46fef98ee7fe3ba4baf36af14166672e, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
+  - {fileID: 11400000, guid: b55cc32770490f14ca42247ff7dcb6a7, type: 2}
+  - {fileID: 11400000, guid: c49619033207d1e41b0f78e9c8e498f0, type: 2}
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1561046581}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: b55cc32770490f14ca42247ff7dcb6a7, type: 2}
+          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1675320235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,7 +2115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1675320236}
   m_Layer: 0
-  m_Name: --- Environment
+  m_Name: === Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2504,7 +2509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2025727935}
   m_Layer: 0
-  m_Name: --- Controllers
+  m_Name: === Controllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2577,6 +2582,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 1442594421}
+  onPlayGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cd3d1f3e768eb434abf3f8c8b882fe29, type: 2}
+        m_TargetAssemblyTypeName: LevelLoaderSO, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BasketballCourt
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2109947751
 GameObject:
   m_ObjectHideFlags: 0

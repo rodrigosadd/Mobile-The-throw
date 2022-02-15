@@ -10,42 +10,37 @@ public class TimeController : MonoBehaviour
     public float gameMinutes;
     public bool canStartGame;
     public bool endGame;
-    private float _countdownToStart;
 
     [Header("Events")]
-    public UnityEvent onCountdownToStart;
+    public UnityEvent onFinishCountdownToStart;
 
     void Start()
     {
-        ConvertToMinutes ();
+        ConvertToMinutes();
+        StartCoroutine(CountdownToStart()); 
     }
 
     void Update()
     {
         GamePlayTime();
         CheckEndGame();
-        CountdownToStart();
     }
 
-    //Converte o valor de tempo de jogo para minutos
     void ConvertToMinutes()
     {
         gameplayTime = gameMinutes * 60;
     }
 
-    //Adiciona tempo de jogo (Metodo usado sempre que o jogador marca um ponto)
     public void AddedTime(float time)
     {
         gameplayTime += time * 60;
         GameManager.GetUI().addedTimeText.text = (time * 60).ToString("00+");        
     }
 
-    //Faz a contagem de tempo do jogo de forma decrescente 
     void GamePlayTime()
     {
         if(!endGame && canStartGame)
         {
-            //Feedback de tempo se esgotando, colocando a cor da letra em vermelho
             if(gameplayTime < 10)
             {
                 GameManager.GetUI().timeText.color = Color.red;
@@ -59,18 +54,14 @@ public class TimeController : MonoBehaviour
         }
     }
 
-    //Verifica se o tempo de jogo e igual a 0 e se caso for o metodo define o fim de jogo
     void CheckEndGame()
     {
         if(gameplayTime <= 0f)
         {             
-            endGame = true;
-            GameManager.GetPlayer().ball.transform.position =  GameManager.GetPlayer().transform.position;
-            GameManager.GetPlayer().ball.ResetTrailValues();
+            endGame = true;            
         }
     }
 
-     //Apenas para facilitar a redefinição dos valores de tempo e de inicio/fim de jogo
     public void ResetValues()
     {
         endGame = false; 
@@ -78,28 +69,18 @@ public class TimeController : MonoBehaviour
         ConvertToMinutes ();
     }
 
-    //Faz com que o jogo inicie apenas depois da animação de inicio de jogo
-    void CountdownToStart()
+    IEnumerator CountdownToStart()
     {
-        if(!canStartGame)
+        if(!GameManager.GetUI().countdownToStartText.activeSelf)
         {
-            if(_countdownToStart < 1)
-            {           
-                if(!GameManager.GetUI().countdownToStartText.activeSelf)
-                {
-                    GameManager.GetUI().countdownToStartText.SetActive(true);
-                }
-
-                _countdownToStart += Time.deltaTime / 3.4f;
-            }
-            else
-            {
-                //AudioManager.instance.Play("Start game");
-                onCountdownToStart?.Invoke();
-                _countdownToStart = 0;
-                GameManager.GetUI().countdownToStartText.SetActive(false);
-                canStartGame = true;                
-            }        
+            GameManager.GetUI().countdownToStartText.SetActive(true);
         }
+
+        yield return new WaitForSeconds(3.4f);
+
+        onFinishCountdownToStart?.Invoke();
+        GameManager.GetUI().countdownToStartText.SetActive(false);
+        canStartGame = true;                
+                 
     }
 }
