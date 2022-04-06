@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableObject: {fileID: 6595941834836397321}
   rbody: {fileID: 3009679703255602132}
+  collisionSound: {fileID: 11400000, guid: 9f0a3685884a0f24184f6708283256cd, type: 2}
   startPosition: {x: 0, y: 0, z: 0}
   trail: {fileID: 3009679703255602134}
   onObjectCollision:

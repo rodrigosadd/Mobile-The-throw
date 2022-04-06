@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class TimeController : MonoBehaviour
-{   
+{
     [Header("Timer variables")]
+    public float timeToStart;
     public float gameplayTime;
     public float gameMinutes;
+    public Color endTimeColor;
+    public Color normalTimeColor;
     public bool canStartGame;
     public bool endGame;
 
@@ -43,11 +46,11 @@ public class TimeController : MonoBehaviour
         {
             if(gameplayTime < 10)
             {
-                GameManager.GetUI().timeText.color = Color.red;
+                GameManager.GetUI().timeText.color = endTimeColor;
             }
             else
             {
-                GameManager.GetUI().timeText.color = Color.white;
+                GameManager.GetUI().timeText.color = normalTimeColor;
             }
 
             gameplayTime -= Time.deltaTime * 1;
@@ -62,25 +65,25 @@ public class TimeController : MonoBehaviour
         }
     }
 
-    public void ResetValues()
-    {
-        endGame = false; 
-        canStartGame = false;       
-        ConvertToMinutes ();
-    }
-
-    IEnumerator CountdownToStart()
+    public IEnumerator CountdownToStart()
     {
         if(!GameManager.GetUI().countdownToStartText.activeSelf)
         {
             GameManager.GetUI().countdownToStartText.SetActive(true);
         }
 
-        yield return new WaitForSeconds(3.4f);
+        yield return new WaitForSeconds(timeToStart);
 
         onFinishCountdownToStart?.Invoke();
         GameManager.GetUI().countdownToStartText.SetActive(false);
         canStartGame = true;                
                  
+    }
+
+    public void ResetValues()
+    {
+        endGame = false;
+        canStartGame = false;
+        ConvertToMinutes();        
     }
 }

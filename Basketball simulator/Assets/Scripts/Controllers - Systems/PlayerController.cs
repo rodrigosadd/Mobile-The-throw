@@ -11,14 +11,27 @@ public class PlayerController : MonoBehaviour
     public float currentThrowingForce; 
     public float maxThrowingForce;
 
+    [Header("Initial values")]
+    public int initialRotationValue;
+    public int initialScore;
+    public int initialAmountThrowing;
+
+    [Header("Pool variables")]
     [SerializeField] private PoolObjects _poolObjects;
     private Vector3 _startPosition;
 
     void Start()
     {
         _startPosition = new Vector3(transform.position.x,transform.position.y, transform.position.z);
+        SetupValues();
     }
  
+    public void SetupValues()
+    {
+        score = initialScore;
+        amountThrowing = initialAmountThrowing;
+    }
+
     public void SetRotation(float value)
     {
         transform.rotation = Quaternion.Euler(value, transform.rotation.y, transform.rotation.z);
@@ -38,10 +51,10 @@ public class PlayerController : MonoBehaviour
 
     public void ResetValues()
     {
-        score = 0;
-        amountThrowing = 0;
-        currentThrowingForce = 1;
+        score = initialScore;
+        amountThrowing = initialAmountThrowing;
+        currentThrowingForce = 0f;
         transform.position = _startPosition;
-        SetRotation(-40f);
+        SetRotation(initialRotationValue);
     }
 }

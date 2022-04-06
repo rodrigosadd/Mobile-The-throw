@@ -7,8 +7,6 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
-
     [Header("Audio variables")]
     public List<SoundSO> sounds;
 
@@ -17,7 +15,6 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
         SetSoundConfigs();
     }
 
@@ -34,6 +31,7 @@ public class AudioManager : MonoBehaviour
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
             sound.source.pitch = sound.pitch;
+            sound.source.playOnAwake = sound.playOnAwake;
             sound.source.loop = sound.loop;
         }
     }

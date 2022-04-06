@@ -7,6 +7,8 @@ public class ScoreController : MonoBehaviour
 {
     [Header("Score variables")]
     public ParticleSystem particleScore;
+    public float addedTimeValue;
+    public float timeToStopParticle;
 
     [Header("Events")]
     public UnityEvent onMadeAPoint;
@@ -28,7 +30,7 @@ public class ScoreController : MonoBehaviour
     void MadeAPoint()
     {
         GameManager.GetPlayer().score++;
-        GameManager.GetTime().AddedTime(0.2f);     
+        GameManager.GetTime().AddedTime(addedTimeValue);     
         particleScore.Play();          
         StartCoroutine(GameManager.GetUI().ActiveAddedTimeAnim());
         StartCoroutine(TimeToStopParticle());
@@ -37,7 +39,7 @@ public class ScoreController : MonoBehaviour
 
     IEnumerator TimeToStopParticle()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(timeToStopParticle);
         particleScore.Stop(); 
     }
 }

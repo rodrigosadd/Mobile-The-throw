@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Sound_BallCollision
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 026c892a63ec9c84b8eeb58b82dcc030, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
+  playOnAwake: 0
   loop: 0
   source: {fileID: 0}

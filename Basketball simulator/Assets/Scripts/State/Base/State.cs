@@ -4,13 +4,6 @@ using UnityEngine;
 
 public abstract class State
 {
-    protected GamePlaySystem GamePlaySystem;
-
-    public State(GamePlaySystem gamePlaySystem)
-    {
-        GamePlaySystem = gamePlaySystem;
-    }
-
     public virtual IEnumerator Start() 
     {
         yield break;
@@ -25,4 +18,15 @@ public abstract class State
     {
         yield break;
     }
+
+    public virtual IEnumerator SetThrowingForce(float value)
+    {
+        yield break;
+    }
+    
+    public virtual IEnumerator SetRotation(float value)
+    {
+        yield break;
+    }
+    
 }

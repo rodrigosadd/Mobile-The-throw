@@ -8,6 +8,7 @@ public class ThrowableObject : MonoBehaviour
     [Header("Object variables")]
     public PoolableObject poolableObject;
     public Rigidbody rbody;
+    public SoundSO collisionSound;
     public Vector3 startPosition;
 
     [Header("Trail variables")]
@@ -46,6 +47,7 @@ public class ThrowableObject : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        GameManager.GetAudioManager().Play(collisionSound);
         onObjectCollision?.Invoke();
     }
 }

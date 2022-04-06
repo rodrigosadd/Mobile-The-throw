@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class BeginState : State
 {
-    public BeginState(GamePlaySystem gamePlaySystem) : base(gamePlaySystem) { }
-
     public override IEnumerator Start()
     {
-        Debug.Log("Hi Enter State...");
+        Debug.Log("On Begin State...");
+        GameManager.instance.SetState(new ThrowingState());
         yield break;
     }
 }

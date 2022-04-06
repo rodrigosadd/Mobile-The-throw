@@ -2691,11 +2691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8afee3ae5d4912746bbbee15885d086d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInstance: {fileID: 1820286133}
-  scoreInstance: {fileID: 2073596175}
-  timeInstance: {fileID: 1961878874}
-  uiInstance: {fileID: 1451369313}
-  poolSystemInstance: {fileID: 777009897}
+  _playerInstance: {fileID: 1820286133}
+  _scoreInstance: {fileID: 2073596175}
+  _timeInstance: {fileID: 1961878874}
+  _uiInstance: {fileID: 1451369313}
+  _poolSystemInstance: {fileID: 777009897}
+  _audioInstance: {fileID: 1816383834}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,49 +3013,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 370.881, y: 253.0988}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &999569135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 999569136}
-  - component: {fileID: 999569137}
-  m_Layer: 0
-  m_Name: Game Play System
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &999569136
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999569135}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1203422914}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &999569137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999569135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d477147634385f4e8fd4dfb0bd3fbfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1010209782
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,7 +3725,6 @@ Transform:
   - {fileID: 1451369314}
   - {fileID: 1961878873}
   - {fileID: 777009896}
-  - {fileID: 999569136}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4131,6 +4088,8 @@ MonoBehaviour:
   countBallThrowingText: {fileID: 1082679503}
   angleText: {fileID: 674686654}
   addedTimeText: {fileID: 369778339}
+  initialTimeColor: {r: 1, g: 1, b: 1, a: 1}
+  timeToDeactivateAddedTimeAnim: 1
   endGamePanel: {fileID: 1138380421}
   finalScoreText: {fileID: 871920892}
   amountBallThrowingText: {fileID: 2016316207}
@@ -4763,7 +4722,7 @@ GameObject:
   - component: {fileID: 1620771838}
   - component: {fileID: 1620771837}
   m_Layer: 5
-  m_Name: Debug_Canvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5054,11 +5013,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - {fileID: 11400000, guid: a4cffac698a78ea49afb35b0d697f5f5, type: 2}
-  - {fileID: 11400000, guid: 9f0a3685884a0f24184f6708283256cd, type: 2}
   - {fileID: 11400000, guid: 97221cad338962c4e8f5be90de3f56fa, type: 2}
   - {fileID: 11400000, guid: db2b6a1a6c579064aa6430d933dbfed4, type: 2}
   - {fileID: 11400000, guid: 6daa878093d67ad4f8cd98d0f732ff8d, type: 2}
   - {fileID: 11400000, guid: 3d9063a6be7a90041ae18540f1e6215b, type: 2}
+  - {fileID: 11400000, guid: 9f0a3685884a0f24184f6708283256cd, type: 2}
   onStart:
     m_PersistentCalls:
       m_Calls:
@@ -5122,6 +5081,9 @@ MonoBehaviour:
   amountThrowing: 0
   currentThrowingForce: 0
   maxThrowingForce: 40
+  initialRotationValue: -45
+  initialScore: 0
+  initialAmountThrowing: 0
   _poolObjects: {fileID: 2015739120}
 --- !u!1 &1909069367
 GameObject:
@@ -5281,8 +5243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a422c06bc7d4c4f8d1b0b2b233216e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToStart: 3.4
   gameplayTime: 0
-  gameMinutes: 0.5
+  gameMinutes: 0.3
+  endTimeColor: {r: 1, g: 0, b: 0, a: 1}
+  normalTimeColor: {r: 1, g: 1, b: 1, a: 1}
   canStartGame: 0
   endGame: 0
   onFinishCountdownToStart:
@@ -5551,6 +5516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleScore: {fileID: 247227449}
+  addedTimeValue: 0.2
+  timeToStopParticle: 0.5
   onMadeAPoint:
     m_PersistentCalls:
       m_Calls:
@@ -5561,6 +5528,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: db2b6a1a6c579064aa6430d933dbfed4, type: 2}
           m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1451369313}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: SetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
