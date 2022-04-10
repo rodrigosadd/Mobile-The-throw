@@ -12,7 +12,7 @@ public class ThrowingState : State
 
     public override IEnumerator Throwing()
     {
-        if (!GameManager.GetTime().endGame && GameManager.GetTime().canStartGame)
+        if (!GameManager.GetTime().endGame)
         {
             GameManager.GetPlayer().amountThrowing++;
             GameManager.GetUI().countBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
@@ -30,10 +30,28 @@ public class ThrowingState : State
         yield break;
     }
 
-    public override IEnumerator SetRotation(float value)
+    public override IEnumerator SetVerticalRotation(float value)
     {
-        GameManager.GetUI().angleText.text = (value * -1).ToString("0º");
-        GameManager.GetPlayer().SetRotation(value);
+        GameManager.GetUI().verticalAngleText.text = (value * -1).ToString("0º");
+        GameManager.GetPlayer().SetVerticalRotation(value);
+        yield break;
+    }
+
+    public override IEnumerator SetHorizontalRotation(float value)
+    {
+        GameManager.GetUI().horizontalAngleText.text = (value * 1).ToString("0º");
+        GameManager.GetPlayer().SetHorizontalRotation(value);
+        yield break;
+    }
+
+    public override IEnumerator MadeAPoint()
+    {
+        GameManager.GetPlayer().score++;
+        GameManager.GetTime().AddedTime(GameManager.GetScore().addedTimeValue);
+        GameManager.GetScore().particleScore.Play();
+        GameManager.GetScore().StartCoroutine(GameManager.GetUI().ActiveAddedTimeAnim());
+        GameManager.GetScore().StartCoroutine(GameManager.GetScore().TimeToStopParticle());
+        GameManager.GetScore().onMadeAPoint?.Invoke();
         yield break;
     }
 }

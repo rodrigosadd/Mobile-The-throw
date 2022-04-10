@@ -13,31 +13,16 @@ public class ScoreController : MonoBehaviour
     [Header("Events")]
     public UnityEvent onMadeAPoint;
 
-    void Update()
-    {
-        TimeToStopParticle();
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Ball"))
         {
             other.GetComponent<PoolableObject>().Reset();
-            MadeAPoint();
+            GameManager.instance.OnMadeAPoint();
         }
     }
 
-    void MadeAPoint()
-    {
-        GameManager.GetPlayer().score++;
-        GameManager.GetTime().AddedTime(addedTimeValue);     
-        particleScore.Play();          
-        StartCoroutine(GameManager.GetUI().ActiveAddedTimeAnim());
-        StartCoroutine(TimeToStopParticle());
-        onMadeAPoint?.Invoke();
-    }
-
-    IEnumerator TimeToStopParticle()
+    public IEnumerator TimeToStopParticle()
     {
         yield return new WaitForSeconds(timeToStopParticle);
         particleScore.Stop(); 

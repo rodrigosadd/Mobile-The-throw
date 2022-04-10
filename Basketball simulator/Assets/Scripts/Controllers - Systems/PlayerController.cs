@@ -12,13 +12,16 @@ public class PlayerController : MonoBehaviour
     public float maxThrowingForce;
 
     [Header("Initial values")]
-    public int initialRotationValue;
+    public int initialVerticalRotationValue;
+    public int initialHorizontalRotationValue;
     public int initialScore;
     public int initialAmountThrowing;
 
     [Header("Pool variables")]
     [SerializeField] private PoolObjects _poolObjects;
     private Vector3 _startPosition;
+    private float _verticalRotationValue;
+    private float _horizontalRotationValue;
 
     void Start()
     {
@@ -32,9 +35,16 @@ public class PlayerController : MonoBehaviour
         amountThrowing = initialAmountThrowing;
     }
 
-    public void SetRotation(float value)
+    public void SetVerticalRotation(float value)
     {
-        transform.rotation = Quaternion.Euler(value, transform.rotation.y, transform.rotation.z);
+        _verticalRotationValue = value;
+        transform.rotation = Quaternion.Euler(value, _horizontalRotationValue, transform.rotation.z);
+    }
+    
+    public void SetHorizontalRotation(float value)
+    {
+        _horizontalRotationValue = value;
+        transform.rotation = Quaternion.Euler(_verticalRotationValue, value, transform.rotation.z);
     }
 
     public void SetBallDirection()
@@ -55,6 +65,6 @@ public class PlayerController : MonoBehaviour
         amountThrowing = initialAmountThrowing;
         currentThrowingForce = 0f;
         transform.position = _startPosition;
-        SetRotation(initialRotationValue);
+        SetVerticalRotation(initialVerticalRotationValue);
     }
 }

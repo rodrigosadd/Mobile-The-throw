@@ -19,8 +19,7 @@ public class TimeController : MonoBehaviour
 
     void Start()
     {
-        ConvertToMinutes();
-        StartCoroutine(CountdownToStart()); 
+        ConvertToMinutes(); 
     }
 
     void Update()
@@ -63,21 +62,6 @@ public class TimeController : MonoBehaviour
         {             
             endGame = true;            
         }
-    }
-
-    public IEnumerator CountdownToStart()
-    {
-        if(!GameManager.GetUI().countdownToStartText.activeSelf)
-        {
-            GameManager.GetUI().countdownToStartText.SetActive(true);
-        }
-
-        yield return new WaitForSeconds(timeToStart);
-
-        onFinishCountdownToStart?.Invoke();
-        GameManager.GetUI().countdownToStartText.SetActive(false);
-        canStartGame = true;                
-                 
     }
 
     public void ResetValues()

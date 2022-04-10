@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {   
     [Header("Input variables")]
-    public Slider angleSlider;
+    public Slider verticalAngleSlider;
+    public Slider horizontalAngleSlider;
     public Slider throwingForceSlider;
     public Button throwingButton;
 
@@ -17,7 +18,8 @@ public class UIController : MonoBehaviour
     public Text scoreText;
     public Text timeText;
     public Text countBallThrowingText;
-    public Text angleText;
+    public Text verticalAngleText;
+    public Text horizontalAngleText;
     public Text addedTimeText;
     public Color initialTimeColor;
     public float timeToDeactivateAddedTimeAnim;
@@ -50,8 +52,11 @@ public class UIController : MonoBehaviour
         throwingForceSlider.minValue = 0f;
         throwingForceSlider.maxValue = GameManager.GetPlayer().maxThrowingForce;
 
-        GameManager.instance.OnSetRotation(GameManager.GetPlayer().initialRotationValue);
-        angleSlider.value = GameManager.GetPlayer().initialRotationValue;
+        GameManager.instance.OnSetVerticalRotation(GameManager.GetPlayer().initialVerticalRotationValue);
+        verticalAngleSlider.value = GameManager.GetPlayer().initialVerticalRotationValue;
+
+        GameManager.instance.OnSetHorizontalRotation(GameManager.GetPlayer().initialHorizontalRotationValue);
+        horizontalAngleSlider.value = GameManager.GetPlayer().initialHorizontalRotationValue;
 
         scoreText.text = GameManager.GetPlayer().initialScore.ToString();
 
@@ -60,7 +65,8 @@ public class UIController : MonoBehaviour
 
     void InitializeListerners()
     {
-        angleSlider.onValueChanged.AddListener(GameManager.instance.OnSetRotation);
+        verticalAngleSlider.onValueChanged.AddListener(GameManager.instance.OnSetVerticalRotation);
+        horizontalAngleSlider.onValueChanged.AddListener(GameManager.instance.OnSetHorizontalRotation);
         throwingForceSlider.onValueChanged.AddListener(GameManager.instance.OnSetThrowingForce);
         throwingButton.onClick.AddListener(GameManager.instance.OnThrowing);
         menuButton.onClick.AddListener(LoadMenuScene);
@@ -101,7 +107,7 @@ public class UIController : MonoBehaviour
     void PlayAgain()
     {
         GameManager.instance.ResetAll();
-        StartCoroutine(GameManager.GetTime().CountdownToStart());
+        GameManager.instance.SetState(new BeginState());
     }
 
     public IEnumerator ActiveAddedTimeAnim()
@@ -118,7 +124,7 @@ public class UIController : MonoBehaviour
         scoreText.text = GameManager.GetPlayer().initialScore.ToString();        
         countBallThrowingText.text = GameManager.GetPlayer().initialAmountThrowing.ToString(); 
         throwingForceSlider.value = 0f;    
-        angleSlider.value = GameManager.GetPlayer().initialRotationValue;
+        verticalAngleSlider.value = GameManager.GetPlayer().initialVerticalRotationValue;
         timeText.color = initialTimeColor;           
     }
 }

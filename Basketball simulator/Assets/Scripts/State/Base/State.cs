@@ -9,11 +9,6 @@ public abstract class State
         yield break;
     }
 
-    public virtual IEnumerator Begin()
-    {
-        yield break;
-    }
-
     public virtual IEnumerator Throwing()
     {
         yield break;
@@ -24,9 +19,18 @@ public abstract class State
         yield break;
     }
     
-    public virtual IEnumerator SetRotation(float value)
+    public virtual IEnumerator SetVerticalRotation(float value)
     {
         yield break;
     }
-    
+
+    public virtual IEnumerator SetHorizontalRotation(float value)
+    {
+        yield break;
+    }
+
+    public virtual IEnumerator MadeAPoint()
+    {
+        yield break;
+    }
 }

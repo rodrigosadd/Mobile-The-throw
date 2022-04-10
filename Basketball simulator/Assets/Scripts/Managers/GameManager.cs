@@ -67,11 +67,6 @@ public class GameManager : StateMachine
     #endregion
 
     #region States Machine Methods 
-    public void OnBegin()
-    {
-        StartCoroutine(State.Begin());
-    }
-
     public void OnThrowing()
     {
         StartCoroutine(State.Throwing());
@@ -81,9 +76,17 @@ public class GameManager : StateMachine
     {
         StartCoroutine(State.SetThrowingForce(value));
     }
-    public void OnSetRotation(float value)
+    public void OnSetVerticalRotation(float value)
     {
-        StartCoroutine(State.SetRotation(value));
+        StartCoroutine(State.SetVerticalRotation(value));
+    }
+    public void OnSetHorizontalRotation(float value)
+    {
+        StartCoroutine(State.SetHorizontalRotation(value));
+    }
+    public void OnMadeAPoint()
+    {
+        StartCoroutine(State.MadeAPoint());
     }
     #endregion
 
