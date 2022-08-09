@@ -639,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742437119102685362, guid: 4696600aeda047641b8061834ec04925, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8742437119102685362, guid: 4696600aeda047641b8061834ec04925, type: 3}
       propertyPath: m_LocalPosition.x
@@ -702,11 +702,6 @@ PrefabInstance:
 --- !u!4 &247227448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8742437119102685362, guid: 4696600aeda047641b8061834ec04925, type: 3}
-  m_PrefabInstance: {fileID: 247227447}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &247227449 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8907369513831430848, guid: 4696600aeda047641b8061834ec04925, type: 3}
   m_PrefabInstance: {fileID: 247227447}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &278304766
@@ -1049,7 +1044,7 @@ Transform:
   - {fileID: 7782348087915110397}
   - {fileID: 6452320038955341650}
   m_Father: {fileID: 543450652291301202}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403190469
 GameObject:
@@ -2841,8 +2836,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInstance: {fileID: 1820286133}
-  _scoreInstance: {fileID: 2073596175}
-  _timeInstance: {fileID: 1961878874}
   _uiInstance: {fileID: 1451369313}
   _poolSystemInstance: {fileID: 777009897}
   _audioInstance: {fileID: 1816383834}
@@ -4389,48 +4382,14 @@ MonoBehaviour:
   throwingButton: {fileID: 1156979424}
   countdownToStartText: {fileID: 1657442470}
   scoreText: {fileID: 1517222983}
-  timeText: {fileID: 1412123517}
   countBallThrowingText: {fileID: 1082679503}
   verticalAngleText: {fileID: 1046812191}
   horizontalAngleText: {fileID: 674686654}
-  addedTimeText: {fileID: 369778339}
-  initialTimeColor: {r: 1, g: 1, b: 1, a: 1}
-  timeToDeactivateAddedTimeAnim: 1
   endGamePanel: {fileID: 1138380421}
   finalScoreText: {fileID: 871920892}
   amountBallThrowingText: {fileID: 2016316207}
   menuButton: {fileID: 916835882}
   playAgainButton: {fileID: 1576809360}
-  onBallThrowing:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1816383834}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 3d9063a6be7a90041ae18540f1e6215b, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onSetEndGame:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1816383834}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 97221cad338962c4e8f5be90de3f56fa, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1451369314
 Transform:
   m_ObjectHideFlags: 0
@@ -5679,25 +5638,23 @@ MonoBehaviour:
   timeToStart: 3.4
   gameplayTime: 0
   gameMinutes: 1
-  endTimeColor: {r: 1, g: 0, b: 0, a: 1}
-  normalTimeColor: {r: 1, g: 1, b: 1, a: 1}
+  endTimeColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  normalTimeColor:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   canStartGame: 0
   endGame: 0
   onFinishCountdownToStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1816383834}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 6daa878093d67ad4f8cd98d0f732ff8d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      - {m_Target: {fileID: 1816383834}, m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp, m_MethodName: Play, m_Mode: 2, m_Arguments: {m_ObjectArgument: {fileID: 11400000, guid: 6daa878093d67ad4f8cd98d0f732ff8d, type: 2}, m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp, m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: , m_BoolArgument: 0}, m_CallState: 2}
+    m_CallsDirty: 1
 --- !u!1 &1994668655
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,7 +6023,7 @@ GameObject:
   - component: {fileID: 2073596176}
   - component: {fileID: 2073596177}
   m_Layer: 0
-  m_Name: Score Controller
+  m_Name: Hoop
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6084,7 +6041,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 543450652291301202}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2073596175
 MonoBehaviour:
@@ -6095,39 +6052,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2073596173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 455da9d6cf40ad0468b186df2a0ef7ef, type: 3}
+  m_Script: {fileID: 11500000, guid: d4a4b929cb79af448b8dd3a78f5bff70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleScore: {fileID: 247227449}
-  addedTimeValue: 0.2
-  timeToStopParticle: 0.5
-  onMadeAPoint:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1816383834}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: db2b6a1a6c579064aa6430d933dbfed4, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1451369313}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: SetScore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!65 &2073596176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6243,9 +6170,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 15.45}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_Children:
+  - {fileID: 2073596174}
   - {fileID: 383890243}
   - {fileID: 247227448}
-  - {fileID: 2073596174}
   - {fileID: 214728739}
   m_Father: {fileID: 1010209783}
   m_RootOrder: 0
