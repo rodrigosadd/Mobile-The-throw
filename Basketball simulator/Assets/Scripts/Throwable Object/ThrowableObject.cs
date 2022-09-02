@@ -11,8 +11,6 @@ public class ThrowableObject : MonoBehaviour
     public SoundSO collisionSound;
     public Vector3 startPosition;
 
-    IScorable _scorable;
-
     [Header("Trail variables")]
     public TrailRenderer trail;
 
@@ -45,14 +43,5 @@ public class ThrowableObject : MonoBehaviour
     {
         trail.time = 0;
         trail.enabled = false;      
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        _scorable = other.GetComponent<IScorable>();
-        if (_scorable != null)
-        {
-            _scorable.HitedTarget();            
-        }
     }
 }

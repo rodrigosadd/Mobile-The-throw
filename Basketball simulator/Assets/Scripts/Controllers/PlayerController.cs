@@ -24,10 +24,20 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        SetupValues();
+        InitialValues();
     }
- 
-    public void SetupValues()
+
+    void OnEnable()
+    {
+        Actions.OnThrowingAction += SetBallDirection;
+    }
+
+    void OnDisable()
+    {
+        Actions.OnThrowingAction -= SetBallDirection;
+    }
+
+    public void InitialValues()
     {
         score = initialScore;
         amountThrowing = initialAmountThrowing;
@@ -55,6 +65,7 @@ public class PlayerController : MonoBehaviour
         PoolableObject obj = _poolObjects.GetMonoBehaviourFromPool();
         obj.transform.position = transform.position;
         obj.throwableObject.rbody.velocity = (transform.rotation * Vector3.forward) * currentThrowingForce;
+        amountThrowing++;
     }
  
     public void ResetValues()

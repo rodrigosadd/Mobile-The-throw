@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : StateMachine
 {
     public static GameManager instance;
 
@@ -18,10 +18,20 @@ public class GameManager : MonoBehaviour
 
     [Header("Audio Manager Instance")]
     [SerializeField] private AudioManager _audioInstance;
+    
+    [Header("Time Controller Instance")]
+    [SerializeField] private TimeController _timeInstance;
+
+    State state;
 
     void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        SetState(new Begin());
     }
 
     #region Instances
@@ -44,11 +54,24 @@ public class GameManager : MonoBehaviour
     {
         return instance._audioInstance;
     }
+    
+    public static TimeController GetTime()
+    {
+        return instance._timeInstance;
+    }
+    #endregion
+
+    #region States
+    public void OnThrowingButton()
+    {
+        currentState.Throwing();
+    }
     #endregion
 
     public void ResetAll()
     {
         GetUI().ResetValues();
         GetPlayer().ResetValues();
+        GetTime().ResetValues();
     }
 }
