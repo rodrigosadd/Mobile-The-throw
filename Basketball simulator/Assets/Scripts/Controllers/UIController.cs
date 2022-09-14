@@ -52,17 +52,17 @@ public class UIController : MonoBehaviour
         Actions.OnStartGameAction += InitializeCountdownToStart;
         Actions.OnMadePointAction += UpdateScore;
         Actions.OnMadePointAction += InitializeAddedTimeCountdown;
-        Actions.OnThrowingAction += UpdateBallThrowingCount;
-        Actions.OnLostAction += UpdateEndGamePanel;
+        Actions.OnEndGameAction += UpdateEndGamePanel;
+        Actions.OnPlayAgainAction += ResetValues;
     }
 
     void OnDisable()
     {
         Actions.OnStartGameAction -= InitializeCountdownToStart;
         Actions.OnMadePointAction -= UpdateScore;        
-        Actions.OnMadePointAction -= InitializeAddedTimeCountdown;        
-        Actions.OnThrowingAction -= UpdateBallThrowingCount;        
-        Actions.OnLostAction -= UpdateEndGamePanel;
+        Actions.OnMadePointAction -= InitializeAddedTimeCountdown;               
+        Actions.OnEndGameAction -= UpdateEndGamePanel;
+        Actions.OnPlayAgainAction -= ResetValues;
     }
 
     void SetupUIValues ()
@@ -82,30 +82,24 @@ public class UIController : MonoBehaviour
         throwingForceSlider.onValueChanged.AddListener(GameManager.GetPlayer().SetThrowingForce);
         throwingButton.onClick.AddListener(GameManager.instance.OnThrowingButton);
         menuButton.onClick.AddListener(LoadMenuScene);
-        playAgainButton.onClick.AddListener(PlayAgain);                
+        playAgainButton.onClick.AddListener(GameManager.instance.OnPlayAgainButton);                
     }
 
-    public void UpdateScore()
-    {
-        if(scoreText.text != GameManager.GetPlayer().score.ToString())        
-            scoreText.text = GameManager.GetPlayer().score.ToString();
-        
+    void UpdateScore()
+    {        
+        scoreText.text = GameManager.GetPlayer().score.ToString();        
     }
 
     public void UpdateBallThrowingCount()
     {
-        if (ballThrowingCountText.text != GameManager.GetPlayer().amountThrowing.ToString())
-            ballThrowingCountText.text = GameManager.GetPlayer().amountThrowing.ToString();
+        ballThrowingCountText.text = GameManager.GetPlayer().amountThrowing.ToString();
     }
 
     void UpdateEndGamePanel()
     {
-        if(!endGamePanel.activeSelf)
-        {
-            endGamePanel.SetActive(true);
-            finalScoreText.text = GameManager.GetPlayer().score.ToString();
-            amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
-        }        
+        endGamePanel.SetActive(true);
+        finalScoreText.text = GameManager.GetPlayer().score.ToString();
+        amountBallThrowingText.text = GameManager.GetPlayer().amountThrowing.ToString();
     }
 
     void LoadMenuScene()
@@ -114,11 +108,6 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
  
-    void PlayAgain()
-    {
-        GameManager.instance.ResetAll();
-    }
-
     void InitializeCountdownToStart()
     {
         StartCoroutine(CountdownToStart());

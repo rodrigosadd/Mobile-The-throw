@@ -29,9 +29,19 @@ public class GameManager : StateMachine
         instance = this;
     }
 
-    private void Start()
+    void Start()
     {
         SetState(new Begin());
+    }
+
+    void OnEnable()
+    {
+        Actions.OnPlayAgainAction += RestartGame;
+    }
+
+    void OnDisable()
+    {
+        Actions.OnPlayAgainAction -= RestartGame;
     }
 
     #region Instances
@@ -66,7 +76,17 @@ public class GameManager : StateMachine
     {
         currentState.Throwing();
     }
+    
+    public void OnPlayAgainButton()
+    {
+        currentState.PlayAgain();
+    }
     #endregion
+
+    public void RestartGame()
+    {
+        SetState(new Begin());
+    }
 
     public void ResetAll()
     {

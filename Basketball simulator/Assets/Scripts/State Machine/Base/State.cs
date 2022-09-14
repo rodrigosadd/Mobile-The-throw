@@ -10,4 +10,8 @@ public abstract class State
     public virtual void Throwing()
     {
     }
+
+    public virtual void PlayAgain()
+    {
+    }
 }

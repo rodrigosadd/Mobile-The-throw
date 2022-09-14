@@ -9,4 +9,5 @@ public static class Actions
     public static Action OnMadePointAction;
     public static Action OnWonAction;
     public static Action OnLostAction;
+    public static Action OnPlayAgainAction;
 }

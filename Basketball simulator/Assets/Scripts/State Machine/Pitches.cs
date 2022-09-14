@@ -14,4 +14,9 @@ public class Pitches : State
     {
         Actions.OnThrowingAction?.Invoke();
     }
+
+    public override void PlayAgain()
+    {
+        Actions.OnPlayAgainAction?.Invoke();
+    }
 }

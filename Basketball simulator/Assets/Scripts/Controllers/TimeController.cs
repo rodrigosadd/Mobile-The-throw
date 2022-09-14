@@ -23,11 +23,13 @@ public class TimeController : MonoBehaviour
     void OnEnable()
     {
         Actions.OnStartTimerAction += StartTimer;
+        Actions.OnPlayAgainAction += ResetValues;
     }
 
     void OnDisable()
     {
-        Actions.OnStartTimerAction -= StartTimer;        
+        Actions.OnStartTimerAction -= StartTimer;
+        Actions.OnPlayAgainAction -= ResetValues;
     }
 
     void StartTimer()
