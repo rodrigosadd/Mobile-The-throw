@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7826bf3769987564e8aea49d26152055, type: 3}
-  m_Name: Sound_MadeAPoint
+  m_Script: {fileID: 11500000, guid: 0c2d26a1326d2f84f914349eba9b2d69, type: 3}
+  m_Name: PlaySound
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 6a2aa319a74344d4685691fa496dc2a2, type: 3}
-  volume: 0.5
-  pitch: 1
-  loop: 0
-  source: {fileID: 0}

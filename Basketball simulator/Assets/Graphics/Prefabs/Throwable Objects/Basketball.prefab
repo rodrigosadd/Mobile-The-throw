@@ -135,9 +135,21 @@ MonoBehaviour:
   collisionSound: {fileID: 11400000, guid: 9f0a3685884a0f24184f6708283256cd, type: 2}
   startPosition: {x: 0, y: 0, z: 0}
   trail: {fileID: 3009679703255602134}
-  onObjectCollision:
+  OnObjectCollision:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8d9d609e0560dc24e888e306f0f31d4e, type: 2}
+        m_TargetAssemblyTypeName: PlaySoundSO, Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 9f0a3685884a0f24184f6708283256cd, type: 2}
+          m_ObjectArgumentAssemblyTypeName: SoundSO, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &3009679703255602132
 Rigidbody:
   m_ObjectHideFlags: 0

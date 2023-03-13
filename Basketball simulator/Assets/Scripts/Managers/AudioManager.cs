@@ -1,14 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     [Header("Audio variables")]
     public List<SoundSO> sounds;
+    public PlaySoundSO playSound;
 
     [Header("Events")]
     public UnityEvent onStart;
@@ -16,6 +14,16 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         SetSoundConfigs();
+    }
+
+    void OnEnable()
+    {
+        playSound.OnPlaySound += Play;
+    }
+
+    void OnDisable()
+    {
+        playSound.OnPlaySound -= Play;        
     }
 
     void Start()
@@ -36,7 +44,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(SoundSO sound)
+    void Play(SoundSO sound)
     {
         if (sound == null)
         {

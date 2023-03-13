@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,7 +14,7 @@ public class ThrowableObject : MonoBehaviour
     public TrailRenderer trail;
 
     [Header("Events")]
-    public UnityEvent onObjectCollision;
+    public UnityEvent OnObjectCollision;
 
     void Start()
     {
@@ -25,11 +24,24 @@ public class ThrowableObject : MonoBehaviour
     void OnEnable()
     {
         StartCoroutine(ActiveTrail());
+        GameManager.instance.OnEndGame += DeactivateObject;
     }
 
     void OnDisable()
     {
         ResetTrailValues();
+        GameManager.instance.OnEndGame -= DeactivateObject;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        OnObjectCollision?.Invoke();
+    }
+
+    void DeactivateObject()
+    {
+        StopAllCoroutines();
+        gameObject.SetActive(false);
     }
 
     IEnumerator ActiveTrail()

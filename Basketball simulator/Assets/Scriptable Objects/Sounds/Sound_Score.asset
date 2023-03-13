@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7826bf3769987564e8aea49d26152055, type: 3}
-  m_Name: Sound_BallCollision
+  m_Name: Sound_Score
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 026c892a63ec9c84b8eeb58b82dcc030, type: 3}
-  volume: 0.3
+  clip: {fileID: 8300000, guid: 6a2aa319a74344d4685691fa496dc2a2, type: 3}
+  volume: 0.5
   pitch: 1
-  playOnAwake: 0
   loop: 0
   source: {fileID: 0}

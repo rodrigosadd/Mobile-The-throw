@@ -1,17 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class GameManager : StateMachine
+public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [Header("Player Instance")]
-    [SerializeField] private PlayerController _playerInstance;
+    [SerializeField] private PlayerHandler _playerInstance;
 
     [Header("UI Instance")]
-    [SerializeField] private UIController _uiInstance;
+    [SerializeField] private UIHandler _uiInstance;
 
     [Header("Pool System Instance")]
     [SerializeField] private PoolSystem _poolSystemInstance;
@@ -20,37 +18,30 @@ public class GameManager : StateMachine
     [SerializeField] private AudioManager _audioInstance;
     
     [Header("Time Controller Instance")]
-    [SerializeField] private TimeController _timeInstance;
+    [SerializeField] private TimeHandler _timeInstance;
 
-    State state;
+    public UnityAction OnStartGame;
+    public UnityAction OnStartTransition;
+    public UnityAction OnEndGame;
+    public UnityAction<int> OnAddedTime;
+    public UnityAction<int> OnAddedScore;
+    public UnityAction<int> OnUpdateUIScore;
+    public UnityAction<int> OnSetAmountThrowing;
+    public UnityAction<float> OnSetMaxThrowingForce;
+    public UnityAction<float> OnSetInitialRotationValue;
 
     void Awake()
     {
         instance = this;
     }
 
-    void Start()
-    {
-        SetState(new Begin());
-    }
-
-    void OnEnable()
-    {
-        Actions.OnPlayAgainAction += RestartGame;
-    }
-
-    void OnDisable()
-    {
-        Actions.OnPlayAgainAction -= RestartGame;
-    }
-
     #region Instances
-    public static PlayerController GetPlayer()
+    public static PlayerHandler GetPlayer()
     {
         return instance._playerInstance;
     }
 
-    public static UIController GetUI()
+    public static UIHandler GetUI()
     {
         return instance._uiInstance;
     }
@@ -65,28 +56,11 @@ public class GameManager : StateMachine
         return instance._audioInstance;
     }
     
-    public static TimeController GetTime()
+    public static TimeHandler GetTime()
     {
         return instance._timeInstance;
     }
     #endregion
-
-    #region States
-    public void OnThrowingButton()
-    {
-        currentState.Throwing();
-    }
-    
-    public void OnPlayAgainButton()
-    {
-        currentState.PlayAgain();
-    }
-    #endregion
-
-    public void RestartGame()
-    {
-        SetState(new Begin());
-    }
 
     public void ResetAll()
     {
